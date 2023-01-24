@@ -242,7 +242,12 @@ const pets = [
     }
   ];
 
-  const petApp = document.querySelector(".petty");
+  const renderToDom = (divId, htmlToRender) => {
+    const selectDiv = document.querySelector(divId);
+    selectDiv.innerHTML = htmlToRender;
+  };
+
+  const petApp = (pets) => {
   let domString="";
 
   for (const pet of pets) {
@@ -257,5 +262,43 @@ const pets = [
   </div>`;
   }
 
-console.log(domString);
-petApp.innerHTML = domString;
+  renderToDom(".petty", domString);
+}
+
+const filter = (pets, typeString) => {
+  const petsArray = [];
+
+  for (const pet of pets) {
+    if (pet.type === typeString) {
+      petsArray.push(pet);
+    }
+  }
+
+  return petsArray;
+}
+
+
+
+const showCatsButton = document.querySelector("#cats");
+const showDinosButton = document.querySelector("#dinos");
+const showDogsButton = document.querySelector("#dogs");
+const showAllPets = document.querySelector("#pets")
+
+showAllPets.addEventListener('click', () => {
+  petApp(pets);
+});
+
+showCatsButton.addEventListener('click', () => {
+  const cats = filter(pets, 'cat');
+  petApp(cats);
+})
+
+showDinosButton.addEventListener('click', () => {
+  const dinos = filter(pets, 'dino');
+  petApp(dinos);
+})
+
+showDogsButton.addEventListener('click', () => {
+  const dogs = filter(pets, 'dog');
+  petApp(dogs);
+})
