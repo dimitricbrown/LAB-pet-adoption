@@ -265,6 +265,34 @@ const pets = [
   renderToDom(".petty", domString);
 }
 
+const createPet = (event) => {
+  event.preventDefault();
+
+  const name = document.querySelector('#name');
+  const imageUrl = document.querySelector('#img');
+  const color = document.querySelector('#color');
+  const specialSkill = document.querySelector('#skill');
+  const type = document.querySelector('#type');
+  console.log(name);
+  console.log(name.value);
+  console.log(skill.value);
+
+  const newPet = {
+    name: name.value,
+    imageUrl: imageUrl.value,
+    color: color.value,
+    specialSkill: specialSkill.value,
+    type: type.value,
+  };
+  
+  pets.push(newPet);
+
+  petApp(pets);
+}
+
+const submitBtn = document.querySelector('#form-submit');
+submitBtn.addEventListener('click', createPet);
+
 const filter = (pets, typeString) => {
   const petsArray = [];
 
