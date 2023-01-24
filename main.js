@@ -257,8 +257,10 @@ const pets = [
     <div class="card-body text-success">
       <p class="card-text">${pet.color}</p>
       <p class="card-text">${pet.specialSkill}</p>
+
     </div>
     <div class="card-footer bg-transparent border-success">${pet.type}</div>
+    <button class="btn btn-danger" id="delete--${pet.id}">Delete</button>
   </div>`;
   }
 
@@ -273,9 +275,8 @@ const createPet = (event) => {
   const color = document.querySelector('#color');
   const specialSkill = document.querySelector('#skill');
   const type = document.querySelector('#type');
-  console.log(name);
-  console.log(name.value);
-  console.log(skill.value);
+
+ 
 
   const newPet = {
     name: name.value,
