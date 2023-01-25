@@ -294,6 +294,22 @@ const createPet = (event) => {
 const submitBtn = document.querySelector('#form-submit');
 submitBtn.addEventListener('click', createPet);
 
+const divApp = document.querySelector('.petty');
+
+divApp.addEventListener('click', (event) => {
+  if(event.target.id.includes('delete')) {
+    const [throwAway, memberId] = event.target.id.split('--');
+
+    const indexOfMember = pets.findIndex(
+      (object) => object.id === Number(memberId)
+    );
+
+    pets.splice(indexOfMember, 1);
+  }
+
+  petApp(pets);
+});
+
 const filter = (pets, typeString) => {
   const petsArray = [];
 
@@ -331,3 +347,9 @@ showDogsButton.addEventListener('click', () => {
   const dogs = filter(pets, 'dog');
   petApp(dogs);
 })
+
+const startApp = () => {
+  petApp(pets);
+}
+
+startApp();
