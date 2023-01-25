@@ -257,13 +257,58 @@ const pets = [
     <div class="card-body text-success">
       <p class="card-text">${pet.color}</p>
       <p class="card-text">${pet.specialSkill}</p>
+
     </div>
     <div class="card-footer bg-transparent border-success">${pet.type}</div>
+    <button class="btn btn-danger" id="delete--${pet.id}">Delete</button>
   </div>`;
   }
 
   renderToDom(".petty", domString);
 }
+
+const createPet = (event) => {
+  event.preventDefault();
+
+  const name = document.querySelector('#name');
+  const imageUrl = document.querySelector('#img');
+  const color = document.querySelector('#color');
+  const specialSkill = document.querySelector('#skill');
+  const type = document.querySelector('#type');
+
+ 
+
+  const newPet = {
+    name: name.value,
+    imageUrl: imageUrl.value,
+    color: color.value,
+    specialSkill: specialSkill.value,
+    type: type.value,
+  };
+  
+  pets.push(newPet);
+
+  petApp(pets);
+}
+
+const submitBtn = document.querySelector('#form-submit');
+submitBtn.addEventListener('click', createPet);
+
+const divApp = document.querySelector('.petty');
+
+divApp.addEventListener('click', (event) => {
+  if(event.target.id.includes('delete')) {
+    const [throwAway, memberId] = event.target.id.split('--');
+
+    const indexOfMember = pets.findIndex(
+      (object) => object.id === Number(memberId)
+    );
+
+    pets.splice(indexOfMember, 1);
+  }
+
+  petApp(pets);
+});
 
 const filter = (pets, typeString) => {
   const petsArray = [];
@@ -302,3 +347,9 @@ showDogsButton.addEventListener('click', () => {
   const dogs = filter(pets, 'dog');
   petApp(dogs);
 })
+
+const startApp = () => {
+  petApp(pets);
+}
+
+startApp();
